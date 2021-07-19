@@ -1,0 +1,107 @@
+jenkins:
+  labelString: "master"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Agent/Build:admin"
+        - "Agent/Configure:admin"
+        - "Agent/Connect:admin"
+        - "Agent/Create:admin"
+        - "Agent/Delete:admin"
+        - "Agent/Disconnect:admin"
+        - "Credentials/Create:admin"
+        - "Credentials/Delete:admin"
+        - "Credentials/ManageDomains:admin"
+        - "Credentials/Update:admin"
+        - "Credentials/View:admin"
+        - "Job/Build:admin"
+        - "Job/Cancel:admin"
+        - "Job/Configure:admin"
+        - "Job/Create:admin"
+        - "Job/Delete:admin"
+        - "Job/Discover:admin"
+        - "Job/Move:admin"
+        - "Job/Read:admin"
+        - "Job/Workspace:admin"
+        - "Lockable Resources/Reserve:admin"
+        - "Lockable Resources/Unlock:admin"
+        - "Overall/Administer:admin"
+        - "Overall/Read:admin"
+        - "Run/Delete:admin"
+        - "Run/Replay:admin"
+        - "Run/Update:admin"
+        - "SCM/Tag:admin"
+        - "View/Configure:admin"
+        - "View/Create:admin"
+        - "View/Delete:admin"
+        - "View/Read:admin"
+        - "Overall/Read:read-only"
+        - "Job/Read:read-only"
+        - "View/Read:read-only"
+        - "Credentials/View:read-only"
+  disableRememberMe: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: ${JENKINS_PASSWORD}
+        - id: "read-only"
+          password: ${JENKINS_READ_ONLY_PASSWORD}
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          id: "github-ssh-credentials"
+          description: "SSH Credentials for Github. Private key provided."
+          scope: GLOBAL
+          username: ${GITHUB_USER_NAME}
+          privateKeySource:
+            directEntry:
+              privateKey: ${SSH_PRIVATE_KEY}
+security:
+  queueItemAuthenticator:
+    authenticators:
+      - global:
+          strategy:
+            specificUsersAuthorizationStrategy:
+              userid: admin
+tool:
+  git:
+    installations:
+      - home: "git"
+        name: "git"
+  go:
+    installations:
+      - name: "go1.13"
+        properties:
+          - installSource:
+              installers:
+                - golangInstaller:
+                    id: "1.13.7"
+unclassified:
+  location:
+    url: ${JENKINS_URL}
+  buildMonitorView:
+    permissionToCollectAnonymousUsageStatistics: false
+  timestamperConfig:
+    allPipelines: true
+jobs:
+  - script: >
+      freeStyleJob('_seed-job') {
+          scm {
+              git {
+                  remote {
+                      url 'git@github.com:aditya-mittal/jenkins-as-code.git'
+                      credentials 'github-ssh-credentials'
+                  }
+                  branch '*/master'
+              }
+          }
+          steps {
+              dsl {
+                  external("jenkins-jobs/src/main/groovy/com/dsl/bootstrap.groovy")
+              }
+          }
+      }

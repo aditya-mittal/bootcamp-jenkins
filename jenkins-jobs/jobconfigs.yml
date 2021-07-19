@@ -1,0 +1,7 @@
+jenkinsJobs:
+  - name: provision-ecs-cluster
+    repo: git@github.com:aditya-mittal/bootcamp-infrastructure.git
+    branch: master
+    jenkinsFilePath: ecs-cluster/Jenkinsfile
+    folder: environments
+    runImmediately: false
