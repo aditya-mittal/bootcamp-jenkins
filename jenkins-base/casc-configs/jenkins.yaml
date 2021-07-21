@@ -93,7 +93,7 @@ jobs:
           scm {
               git {
                   remote {
-                      url 'git@github.com:aditya-mittal/jenkins-as-code.git'
+                      url 'git@github.com:aditya-mittal/bootcamp-jenkins.git'
                       credentials 'github-ssh-credentials'
                   }
                   branch '*/master'
