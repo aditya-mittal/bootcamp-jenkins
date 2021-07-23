@@ -85,5 +85,5 @@ unclassified:
     url: ${JENKINS_URL}
   buildMonitorView:
     permissionToCollectAnonymousUsageStatistics: false
-  timestamperConfig:
+  timestamper:
     allPipelines: true
