@@ -64,9 +64,7 @@ security:
   queueItemAuthenticator:
     authenticators:
       - global:
-          strategy:
-            specificUsersAuthorizationStrategy:
-              userid: admin
+          strategy: "triggeringUsersAuthorizationStrategy"
 tool:
   git:
     installations:
