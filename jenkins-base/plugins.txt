@@ -20,7 +20,6 @@ git:4.0.0
 git-client:3.0.0
 gitlab-plugin:1.5.13
 git-server:1.9
-golang:1.2
 greenballs:1.15
 job-dsl:1.74
 jsch:0.1.55.1
