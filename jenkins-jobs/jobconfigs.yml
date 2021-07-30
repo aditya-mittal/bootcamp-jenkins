@@ -5,8 +5,9 @@ jenkinsJobs:
     jenkinsFilePath: ecs-cluster/Jenkinsfile
     folder: environments
     runImmediately: false
-  - name: fraud-checker-service
+  - name: build
     repo: git@github.com:aditya-mittal/fraud-checker-service.git
     branch: master
     jenkinsFilePath: Jenkinsfile
+    folder: fraud-checker-service
     runImmediately: false
