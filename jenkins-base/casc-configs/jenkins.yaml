@@ -87,3 +87,21 @@ unclassified:
     permissionToCollectAnonymousUsageStatistics: false
   timestamper:
     allPipelines: true
+jobs:
+  - script: >
+      freeStyleJob('_seed-job') {
+          scm {
+              git {
+                  remote {
+                      url 'git@github.com:aditya-mittal/bootcamp-jenkins.git'
+                      credentials 'github-ssh-credentials'
+                  }
+                  branch '*/master'
+              }
+          }
+          steps {
+              dsl {
+                  external("jenkins-jobs/src/main/groovy/com/dsl/bootstrap.groovy")
+              }
+          }
+      }
