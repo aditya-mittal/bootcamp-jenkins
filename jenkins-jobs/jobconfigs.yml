@@ -10,9 +10,8 @@ jenkinsJobs:
     branch: master
     jenkinsFilePath: ecs-service/Jenkinsfile
     runImmediately: false
-  - name: build
+  - name: fraud-checker-service
     repo: git@github.com:aditya-mittal/fraud-checker-service.git
     branch: master
     jenkinsFilePath: Jenkinsfile
-    folder: fraud-checker-service
     runImmediately: false
