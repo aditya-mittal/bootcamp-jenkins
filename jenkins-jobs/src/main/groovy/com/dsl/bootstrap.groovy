@@ -23,9 +23,13 @@ jobConfigs["jenkinsJobs"].each {
     println "config =>: JobName: $appName, Folder: $folderName, Repo: $remoteRepo, Branch: $repoBranch, JenkinsFilePath: $jenkinsFilePath"
 
     String jobName = appName
-    folder(folderName)
-
-    String fullyQualifiedJobName = "$folderName/$jobName"
+    String fullyQualifiedJobName;
+    if(folderName) {
+        folder(folderName)
+        fullyQualifiedJobName = "$folderName/$jobName"
+    } else {
+        fullyQualifiedJobName = "$jobName"
+    }
 
     jobsList.push(fullyQualifiedJobName)
 
