@@ -31,13 +31,13 @@ $ docker run -d -p 8080:8080 \
 ```bash
 # tag the docker image
 $ shaId=$(git rev-parse HEAD)
-$ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ee-pune-ecr/jenkins:${shaId}
-$ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ee-pune-ecr/jenkins:latest
+$ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ecr/jenkins:${shaId}
+$ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ecr/jenkins:latest
 
 # docker login to ECR 
 $ $(aws ecr get-login --no-include-email --region us-east-1)
 
 # docker push to ECR
-$ docker push 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ee-pune-ecr/jenkins:${shaId}
-$ docker push 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ee-pune-ecr/jenkins:latest
+$ docker push 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ecr/jenkins:${shaId}
+$ docker push 038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ecr/jenkins:latest
 ```
