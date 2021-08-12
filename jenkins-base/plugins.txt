@@ -17,6 +17,7 @@ envinject
 envinject-api
 git
 git-client
+github
 gitlab-plugin
 git-server
 golang
