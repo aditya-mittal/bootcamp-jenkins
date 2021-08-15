@@ -55,17 +55,3 @@ $ docker run -d -p 8080:8080 \
     -v ~/.ssh/id_rsa:/run/secrets/SSH_PRIVATE_KEY \
     --name jenkins jenkins-casc/jenkins-base
 ```
-
-### Push image to ECR
-```bash
-# tag the docker image
-$ docker tag jenkins-casc/jenkins-base TBD_ECR_REPO_URL/jenkins:$(git rev-parse HEAD)
-$ docker tag jenkins-casc/jenkins-base TBD_ECR_REPO_URL/jenkins:latest
-
-# docker login to ECR 
-$ $(aws ecr get-login --no-include-email --region us-east-1)
-
-# docker push to ECR
-$ docker push TBD_ECR_REPO_URL/jenkins:${shaId}
-$ docker push TBD_ECR_REPO_URL/jenkins:latest
-```
