@@ -4,14 +4,12 @@ jenkinsJobs:
     branch: master
     jenkinsFilePath: ecs-cluster/Jenkinsfile
     folder: environments
-    runImmediately: false
   - name: deploy-nginx
     repo: git@github.com:aditya-mittal/bootcamp-infrastructure.git
     branch: master
     jenkinsFilePath: ecs-service/Jenkinsfile
-    runImmediately: false
   - name: fraud-checker-service
     repo: git@github.com:aditya-mittal/fraud-checker-service.git
     branch: master
     jenkinsFilePath: Jenkinsfile
-    runImmediately: false
+    githubHookTrigger: true

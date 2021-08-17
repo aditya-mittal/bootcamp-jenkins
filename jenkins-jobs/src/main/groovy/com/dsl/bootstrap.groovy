@@ -18,7 +18,9 @@ jobConfigs["jenkinsJobs"].each {
     String repoBranch = jobDetails.branch
     String jenkinsFilePath = jobDetails.jenkinsFilePath
     String folderName = jobDetails.folder
+    String buildSchedule = jobDetails.buildSchedule
     boolean runImmediately = jobDetails.runImmediately
+    boolean githubHookTrigger = jobDetails.githubHookTrigger
 
     println "config =>: JobName: $appName, Folder: $folderName, Repo: $remoteRepo, Branch: $repoBranch, JenkinsFilePath: $jenkinsFilePath"
 
@@ -34,8 +36,15 @@ jobConfigs["jenkinsJobs"].each {
     jobsList.push(fullyQualifiedJobName)
 
     def jobToBeCreated = pipelineJob(fullyQualifiedJobName) {
-        triggers {
-            scm('H * * * *')
+        if(githubHookTrigger) {
+            triggers {
+                gitHubPushTrigger()
+            }
+        }
+        if(buildSchedule) {
+            triggers {
+                cron(buildSchedule)
+            }
         }
 
         concurrentBuild(false)
@@ -55,8 +64,7 @@ jobConfigs["jenkinsJobs"].each {
             }
         }
     }
-
-    if (runImmediately) {
+    if(githubHookTrigger || runImmediately) {
         queue(jobToBeCreated)
     }
 }
