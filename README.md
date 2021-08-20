@@ -43,8 +43,9 @@ $ shaId=$(git rev-parse HEAD)
 $ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/REPLACE-USERNAME-bootcamp-2021-ecr/jenkins:${shaId}
 $ docker tag jenkins-casc/jenkins-base 038062473746.dkr.ecr.us-east-1.amazonaws.com/REPLACE-USERNAME-bootcamp-2021-ecr/jenkins:latest
 
-# docker login to ECR 
+# docker login to ECR, use any of the below commands depending on version of your aws-cli 
 $ $(aws ecr get-login --no-include-email --region us-east-1)
+$ aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 038062473746.dkr.ecr.us-east-1.amazonaws.com
 
 # docker push to ECR
 $ docker push 038062473746.dkr.ecr.us-east-1.amazonaws.com/REPLACE-USERNAME-bootcamp-2021-ecr/jenkins:${shaId}
