@@ -62,8 +62,9 @@ $ docker run -d -p 8080:8080 \
 $ docker tag jenkins-casc/jenkins-base TBD_ECR_REPO_URL/jenkins:$(git rev-parse HEAD)
 $ docker tag jenkins-casc/jenkins-base TBD_ECR_REPO_URL/jenkins:latest
 
-# docker login to ECR 
+# docker login to ECR, use any of the below commands depending on version of your aws-cli 
 $ $(aws ecr get-login --no-include-email --region us-east-1)
+$ aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 038062473746.dkr.ecr.us-east-1.amazonaws.com
 
 # docker push to ECR
 $ docker push TBD_ECR_REPO_URL/jenkins:${shaId}
